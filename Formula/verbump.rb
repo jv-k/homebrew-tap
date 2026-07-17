@@ -1,8 +1,8 @@
-class VerBump < Formula
+class Verbump < Formula
   desc "Release tool for Git projects: SemVer bump, CHANGELOG, tag, push"
   homepage "https://github.com/jv-k/ver-bump"
-  url "https://github.com/jv-k/ver-bump/archive/refs/tags/v2.0.2.tar.gz"
-  sha256 "75975615c6251652159e3e3fb78447c710da06353852c2b37826a535ff33f60f"
+  url "https://github.com/jv-k/ver-bump/archive/refs/tags/v3.0.0.tar.gz"
+  sha256 "298473a5c476c62c42c5a32ab935ed7e422b482fb224ac56220bcb3bbf7668a8"
   license "MIT"
 
   depends_on "bash"
@@ -13,11 +13,13 @@ class VerBump < Formula
     # ver-bump.sh resolves its real path (realpath), then sources lib/*.sh and
     # reads package.json from that directory — keep all three together.
     libexec.install "ver-bump.sh", "lib", "package.json"
-    bin.install_symlink libexec/"ver-bump.sh" => "ver-bump"
+    # The 3.0 rebrand names the command VerBump (the npm bin entry does the
+    # same); the GitHub repo and script keep the historical ver-bump name.
+    bin.install_symlink libexec/"ver-bump.sh" => "VerBump"
   end
 
   test do
-    assert_match "ver-bump #{version}", shell_output("#{bin}/ver-bump --version")
-    system bin/"ver-bump", "--help"
+    assert_match "VerBump #{version}", shell_output("#{bin}/VerBump --version")
+    system bin/"VerBump", "--help"
   end
 end

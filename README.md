@@ -1,21 +1,25 @@
-# jv-k/homebrew-ver-bump
+# jv-k/homebrew-tap
 
-Homebrew tap for [**ver-bump**](https://github.com/jv-k/ver-bump) — a release
-tool for Git projects: SemVer bump, CHANGELOG, tag, push.
+Homebrew tap for [jv-k](https://github.com/jv-k)'s tools.
+
+| Formula | Installs | What it is |
+| ------- | -------- | ---------- |
+| `verbump` | `VerBump` | [**VerBump**](https://github.com/jv-k/ver-bump) — a release tool for Git projects: SemVer bump, CHANGELOG, tag, push |
 
 ## Install
 
 ```sh
-brew install jv-k/ver-bump/ver-bump
+brew install jv-k/tap/verbump
 ```
 
 or, in two steps:
 
 ```sh
-brew tap jv-k/ver-bump
-brew install ver-bump
+brew tap jv-k/tap
+brew install verbump
 ```
 
+The installed command is **`VerBump`** (matching the npm package's bin).
 Runtime dependencies (`bash`, `jq`) are installed automatically.
 
 ## Maintenance
@@ -30,6 +34,6 @@ Runtime dependencies (`bash`, `jq`) are installed automatically.
 
 ## Issues
 
-Report problems with ver-bump itself on the
-[main repo](https://github.com/jv-k/ver-bump/issues); packaging/tap issues
-[here](https://github.com/jv-k/homebrew-ver-bump/issues).
+Report problems with VerBump itself on the
+[main repo](https://github.com/jv-k/ver-bump/issues); packaging problems on
+[this tap's issue tracker](https://github.com/jv-k/homebrew-tap/issues).

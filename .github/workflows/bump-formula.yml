@@ -1,6 +1,6 @@
 name: Bump formula
 
-# Keeps Formula/ver-bump.rb pointing at the latest stable vX.Y.Z tag of
+# Keeps Formula/verbump.rb pointing at the latest stable vX.Y.Z tag of
 # jv-k/ver-bump. Runs on a schedule (no cross-repo secret needed) and can be
 # dispatched manually right after cutting a release. Pre-release tags
 # (e.g. v2.1.0-rc.1) never match the stable-tag pattern and are ignored.
@@ -28,7 +28,7 @@ jobs:
           tag="$(gh api repos/jv-k/ver-bump/tags --paginate --jq '.[].name' \
                  | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | sort -V | tail -1)"
           [ -n "$tag" ] || { echo "no stable tag found" >&2; exit 1; }
-          current="$(grep -Eo 'refs/tags/v[0-9]+\.[0-9]+\.[0-9]+' Formula/ver-bump.rb | sed 's|refs/tags/||')"
+          current="$(grep -Eo 'refs/tags/v[0-9]+\.[0-9]+\.[0-9]+' Formula/verbump.rb | sed 's|refs/tags/||')"
           echo "tag=$tag"         >> "$GITHUB_OUTPUT"
           echo "current=$current" >> "$GITHUB_OUTPUT"
 
@@ -39,10 +39,10 @@ jobs:
           curl -fsSL -o release.tar.gz "https://github.com/jv-k/ver-bump/archive/refs/tags/${tag}.tar.gz"
           sha="$(sha256sum release.tar.gz | cut -d' ' -f1)"
           rm release.tar.gz
-          sed -i -E "s|refs/tags/v[0-9]+\.[0-9]+\.[0-9]+\.tar\.gz|refs/tags/${tag}.tar.gz|" Formula/ver-bump.rb
-          sed -i -E "s|^(  sha256 \")[0-9a-f]{64}(\")$|\1${sha}\2|" Formula/ver-bump.rb
-          grep -q "refs/tags/${tag}.tar.gz" Formula/ver-bump.rb
-          grep -q "$sha" Formula/ver-bump.rb
+          sed -i -E "s|refs/tags/v[0-9]+\.[0-9]+\.[0-9]+\.tar\.gz|refs/tags/${tag}.tar.gz|" Formula/verbump.rb
+          sed -i -E "s|^(  sha256 \")[0-9a-f]{64}(\")$|\1${sha}\2|" Formula/verbump.rb
+          grep -q "refs/tags/${tag}.tar.gz" Formula/verbump.rb
+          grep -q "$sha" Formula/verbump.rb
 
       - name: Commit, push and re-run CI
         if: steps.latest.outputs.tag != steps.latest.outputs.current
@@ -51,8 +51,8 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add Formula/ver-bump.rb
-          git commit -m "chore(formula): bump ver-bump to ${{ steps.latest.outputs.tag }}"
+          git add Formula/verbump.rb
+          git commit -m "chore(formula): bump verbump to ${{ steps.latest.outputs.tag }}"
           git push
           # Pushes made with GITHUB_TOKEN don't trigger push workflows —
           # dispatch CI explicitly so the bumped formula still gets audited.

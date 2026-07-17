@@ -25,18 +25,18 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Style check
-        run: brew style jv-k/ver-bump
+        run: brew style jv-k/tap
 
       - name: Audit (strict, online)
-        run: brew audit --strict --online --tap jv-k/ver-bump
+        run: brew audit --strict --online --tap jv-k/tap
 
       - name: Install
-        run: brew install --formula jv-k/ver-bump/ver-bump
+        run: brew install --formula jv-k/tap/verbump
 
       - name: Smoke-test installed binary
         run: |
-          ver-bump --version
-          ver-bump --help
+          VerBump --version
+          VerBump --help
 
       - name: Test
-        run: brew test --verbose jv-k/ver-bump/ver-bump
+        run: brew test --verbose jv-k/tap/verbump
