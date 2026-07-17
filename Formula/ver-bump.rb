@@ -9,7 +9,7 @@ class VerBump < Formula
   depends_on "jq"
 
   def install
-    inreplace "ver-bump.sh", %r{\A#!/bin/bash}, "#!#{Formula["bash"].opt_bin}/bash"
+    inreplace "ver-bump.sh", %r{\A#!/bin/bash}, "#!#{formula_opt_bin("bash")}/bash"
     # ver-bump.sh resolves its real path (realpath), then sources lib/*.sh and
     # reads package.json from that directory — keep all three together.
     libexec.install "ver-bump.sh", "lib", "package.json"
