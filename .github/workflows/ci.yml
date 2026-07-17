@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Set up Homebrew
+        id: set-up-homebrew
+        uses: Homebrew/actions/setup-homebrew@1f8e202ffddf94def7f42f6fa3a482e821489f9c # 2026.07.10.1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Style check
+        run: brew style jv-k/ver-bump
+
+      - name: Audit (strict, online)
+        run: brew audit --strict --online --tap jv-k/ver-bump
+
+      - name: Install
+        run: brew install --formula jv-k/ver-bump/ver-bump
+
+      - name: Smoke-test installed binary
+        run: |
+          ver-bump --version
+          ver-bump --help
+
+      - name: Test
+        run: brew test --verbose jv-k/ver-bump/ver-bump
