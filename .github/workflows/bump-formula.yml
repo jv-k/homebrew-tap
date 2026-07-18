@@ -1,7 +1,7 @@
 name: Bump formula
 
 # Keeps Formula/verbump.rb pointing at the latest stable vX.Y.Z tag of
-# jv-k/ver-bump. Runs on a schedule (no cross-repo secret needed) and can be
+# jv-k/VerBump. Runs on a schedule (no cross-repo secret needed) and can be
 # dispatched manually right after cutting a release. Pre-release tags
 # (e.g. v2.1.0-rc.1) never match the stable-tag pattern and are ignored.
 
@@ -20,12 +20,12 @@ jobs:
     steps:
       - uses: actions/checkout@v5
 
-      - name: Find latest stable tag of jv-k/ver-bump
+      - name: Find latest stable tag of jv-k/VerBump
         id: latest
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          tag="$(gh api repos/jv-k/ver-bump/tags --paginate --jq '.[].name' \
+          tag="$(gh api repos/jv-k/VerBump/tags --paginate --jq '.[].name' \
                  | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | sort -V | tail -1)"
           [ -n "$tag" ] || { echo "no stable tag found" >&2; exit 1; }
           current="$(grep -Eo 'refs/tags/v[0-9]+\.[0-9]+\.[0-9]+' Formula/verbump.rb | sed 's|refs/tags/||')"
@@ -36,7 +36,7 @@ jobs:
         if: steps.latest.outputs.tag != steps.latest.outputs.current
         run: |
           tag="${{ steps.latest.outputs.tag }}"
-          curl -fsSL -o release.tar.gz "https://github.com/jv-k/ver-bump/archive/refs/tags/${tag}.tar.gz"
+          curl -fsSL -o release.tar.gz "https://github.com/jv-k/VerBump/archive/refs/tags/${tag}.tar.gz"
           sha="$(sha256sum release.tar.gz | cut -d' ' -f1)"
           rm release.tar.gz
           sed -i -E "s|refs/tags/v[0-9]+\.[0-9]+\.[0-9]+\.tar\.gz|refs/tags/${tag}.tar.gz|" Formula/verbump.rb
