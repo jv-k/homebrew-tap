@@ -16,7 +16,9 @@ class Deslopper < Formula
   end
 
   test do
-    assert_match "deslopper #{version}", shell_output("#{bin}/deslopper --version")
+    # Bare version string: v1.0.0 prints "deslopper 1.0.0", later releases
+    # render the help banner's pill, "deslopper v1.0.1".
+    assert_match version.to_s, shell_output("#{bin}/deslopper --version")
 
     # A lint run must find the em-dash tell, proving the bundled presets shipped.
     (testpath/"sample.md").write("The fix was simple — restart the server.\n")
