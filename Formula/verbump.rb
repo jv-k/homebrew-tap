@@ -9,11 +9,11 @@ class Verbump < Formula
   depends_on "jq"
 
   def install
-    inreplace "VerBump.sh", %r{\A#!/bin/bash}, "#!#{formula_opt_bin("bash")}/bash"
-    # VerBump.sh resolves its real path (realpath), then sources lib/*.sh and
+    inreplace "verbump.sh", %r{\A#!/bin/bash}, "#!#{formula_opt_bin("bash")}/bash"
+    # verbump.sh resolves its real path (realpath), then sources lib/*.sh and
     # reads package.json from that directory — keep all three together.
-    libexec.install "VerBump.sh", "lib", "package.json"
-    bin.install_symlink libexec/"VerBump.sh" => "VerBump"
+    libexec.install "verbump.sh", "lib", "package.json"
+    bin.install_symlink libexec/"verbump.sh" => "VerBump"
   end
 
   test do
