@@ -1,8 +1,8 @@
 class Verbump < Formula
   desc "Release tool for Git projects: SemVer bump, CHANGELOG, tag, push"
   homepage "https://github.com/jv-k/VerBump"
-  url "https://github.com/jv-k/VerBump/archive/refs/tags/v4.1.0.tar.gz"
-  sha256 "68b0b38babbd27c6983688b051f2b276b75ebe83ad079c46fa855569ef7607cf"
+  url "https://github.com/jv-k/VerBump/archive/refs/tags/v4.1.1.tar.gz"
+  sha256 "fb8061935cc007b77cfdce386ea0c90a7947ae195546f2830c01890c4fafacba"
   license "MIT"
 
   depends_on "bash"
