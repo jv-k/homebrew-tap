@@ -4,8 +4,8 @@ class Deslopper < Formula
   desc "Deterministic prose linter for the tells of machine-generated writing"
   homepage "https://github.com/jv-k/deslopper"
   # url and sha256 are rewritten by deslopper's release workflow on each tag.
-  url "https://github.com/jv-k/deslopper/releases/download/v2.2.1/deslopper-2.2.1.tar.gz"
-  sha256 "9ad5d361f98bd3aad747749e8b46ef01a3e0b0f06407fa6e44560b08bfe34564"
+  url "https://github.com/jv-k/deslopper/releases/download/v2.2.2/deslopper-2.2.2.tar.gz"
+  sha256 "bab080714a39372d0e263cc4ca1035a7e1d1da6689ebb21d472941982607493c"
   license "MIT"
 
   depends_on "python@3.13"
