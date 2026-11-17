@@ -41,3 +41,9 @@ jobs:
 
       - name: Test
         run: brew test --verbose jv-k/tap/verbump
+
+      - name: Install kryso
+        run: brew install --formula jv-k/tap/kryso
+
+      - name: Test kryso
+        run: brew test --verbose jv-k/tap/kryso

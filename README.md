@@ -5,18 +5,20 @@ Homebrew tap for [jv-k](https://github.com/jv-k)'s tools.
 | Formula | Installs | What it is |
 | ------- | -------- | ---------- |
 | `verbump` | `VerBump` | [**VerBump**](https://github.com/jv-k/VerBump) — a release tool for Git projects: SemVer bump, CHANGELOG, tag, push |
+| `kryso` | `kryso` | The command of KrysoWorks, which works a repository's backlog while its maintainer is away. Placeholder: version 0.0.1 only reserves the name. |
 
 ## Install
 
 ```sh
 brew install jv-k/tap/verbump
+brew install jv-k/tap/kryso
 ```
 
 or, in two steps:
 
 ```sh
 brew tap jv-k/tap
-brew install verbump
+brew install verbump   # or: brew install kryso
 ```
 
 The installed command is **`VerBump`** (matching the npm package's bin).
